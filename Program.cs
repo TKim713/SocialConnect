@@ -1,9 +1,21 @@
-﻿namespace SocialConnect
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace SocialConnect
 {
     class Program
     {
+        private static List<User> listUser = new List<User>();
         static void Main(string[] args)
         {
+            User user1 = new User("Kim", "21110521@student.hcmute.edu.vn", "123456");
+            User user2 = new User("Tam", "21110638@student.hcmute.edu.vn", "123456");
+            User user3 = new User("My", "21110548@student.hcmute.edu.vn", "123456");
+            User user4 = new User("Xuan An", "21110364@student.hcmute.edu.vn", "123456");
+            listUser.Add(user1);
+            listUser.Add(user2);
+            listUser.Add(user3);
+            listUser.Add(user4);
+
         Menu:
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -97,7 +109,10 @@
                 case 4:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Khong tim thay!");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Bam Enter de tiep tuc... ");
                     Console.ForegroundColor = ConsoleColor.White;
+                    while (Console.ReadKey().Key != ConsoleKey.Enter) { }
                     break;
                 //Loi xoa doi tuong
                 case 5:
@@ -122,6 +137,7 @@
             Console.WriteLine("|         3. Doi Mat Khau                  |");
             Console.WriteLine("|         4. Quan Ly Trang Ca Nhan         |");
             Console.WriteLine("|         5. Xem Danh Sach Nguoi Dung      |");
+            Console.WriteLine("|         6. Thoat                         |");
             Console.WriteLine("|__________________________________________|");
             Console.Write("\nBan chon: ");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -130,18 +146,23 @@
 
             switch (chon)
             {
-                //Neu la Khach hang Viet Nam
+                // Tim kiem nguoi dung
                 case 1:
                     Console.Clear();
                     TimKiemNguoiDung();
                     break;
-                //Neu la Khach hang nuoc ngoai
+                // Xem tat ca thong bao
                 case 2:
                     Console.Clear();
                     
                     break;
-                //Quay lai Menu
-                case 3:
+                // Xem danh sach nguoi dung
+                case 5:
+                    Console.Clear();
+
+                    break;
+                // Quay lai Menu
+                case 6:
                     break;
                 //Nhap khong hop le
                 default:
@@ -156,7 +177,7 @@
         {
             Console.Clear();
             int chon;
-            string nguoiDung;
+            string username;
             Console.WriteLine("\n_____________TIM KIEM NGUOI DUNG_____________");
             Console.WriteLine("|                                            |");
             Console.WriteLine("|            1. Nhap Ten Nguoi Dung          |");
@@ -172,46 +193,101 @@
                 TimKiem:
                     Console.Write("\nNhap nguoi dung can tim: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    nguoiDung = Console.ReadLine();
+                    username = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.White;
-                    if (nguoiDung == "")
+                    if (username == "")
                     {
                         Check(2);
                         goto TimKiem;
                     }
-                    XuatNguoiDung(nguoiDung);
-                    Console.WriteLine("\nBan co muon tiep tuc tim kiem?");
-                    Console.WriteLine("1. Co");
-                    Console.WriteLine("2. Khong");
-                Check1:
-                    Console.Write("Ban chon: ");
-                    int chon1;
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    int.TryParse(Console.ReadLine(), out chon1);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    switch (chon1)
-                    {
-                        //Chon co -> Ve tab Tim kiem
-                        case 1:
-                            Console.Clear();
-                            TimKiemNguoiDung();
-                            break;
-                        //Chon khong -> Ve Menu
-                        case 2:
-                            break;
-                        //Nhap khong hop le
-                        default:
-                            Check(1);
-                            goto Check1;
-                    }
+                    XuatNguoiDung(username);
                     break;
                 //Quay lai Menu
                 case 2:
+                    MainMenu();
                     break;
                 //Nhap khong hop le
                 default:
                     Check(1);
                     TimKiemNguoiDung();
+                    break;
+            }
+        }
+
+        // Xuat nguoi dung
+        static void XuatNguoiDung(string username)
+        {
+            int chon;
+            bool test = false;
+            for (int i = 0; i < listUser.Count; i++)
+            {
+                if (String.Compare(listUser[i].Username, username) == 0)
+                {
+                    test = true;
+                    Console.WriteLine("Tim thay nguoi dung " + username + "!");
+                    Console.WriteLine("1. Xem trang ca nhan \n2. Quay lai");
+                    Console.Write("\nBan chon: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    int.TryParse(Console.ReadLine(), out chon);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    switch (chon)
+                    {
+                        case 1:
+                            Console.Clear();
+                            XemTrangCaNhan();
+                            break;
+                        //Quay lai Menu
+                        case 2:
+                            Console.Clear();
+                            TimKiemNguoiDung();
+                            break;
+                        //Nhap khong hop le
+                        default:
+                            Check(1);
+                            XuatNguoiDung(username);
+                            break;
+                    }
+                    break;
+                }
+            }
+            if (test == false)
+            {
+                Check(4);
+                TimKiemNguoiDung();
+            } 
+        }
+
+        // Xem trang ca nhan
+        static void XemTrangCaNhan()
+        {
+            int chon;
+            Console.WriteLine("\n_______________XEM TRANG CA NHAN_______________");
+            Console.WriteLine("|                                              |");
+            Console.WriteLine("|               Chon chuc nang                 |");
+            Console.WriteLine("|                                              |");
+            Console.WriteLine("|      1. Xem Chi Tiet Thong Tin Ca Nhan       |");
+            Console.WriteLine("|      2. Xem Cac Bai Viet                     |");
+            Console.WriteLine("|      3. Nhan Tin                             |");
+            Console.WriteLine("|      4. Quay Lai                             |");
+            Console.WriteLine("|______________________________________________|");
+            Console.Write("\nBan chon: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            int.TryParse(Console.ReadLine(), out chon);
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (chon)
+            {
+                case 1:
+                    break;
+                //Quay lai Menu
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    TimKiemNguoiDung();
+                    break;
+                //Nhap khong hop le
+                default:
                     break;
             }
         }
