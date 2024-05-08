@@ -6,7 +6,7 @@
         {
         Menu:
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("\n      UNG DUNG MANG XA HOI SOCIALCONNECT\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("     _______________MENU________________");
@@ -25,7 +25,7 @@
             {
                 //Neu chon Dang Nhap
                 case 1:
-                    //NhapThongTin();
+                    MainMenu();
                     goto Menu;
                 //Neu chon Dang Ky
                 case 2:
@@ -104,6 +104,114 @@
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Doi tuong khong ton tai hoac da bi xoa!");
                     Console.ForegroundColor = ConsoleColor.White;
+                    break;
+            }
+        }
+
+        // Menu Chinh
+        static void MainMenu()
+        {
+            int chon;
+            Console.Clear();
+            Console.WriteLine("\n________________MENU CHINH________________");
+            Console.WriteLine("|                                          |");
+            Console.WriteLine("|               Chon chuc nang             |");
+            Console.WriteLine("|                                          |");
+            Console.WriteLine("|         1. Tim Kiem Nguoi Dung           |");
+            Console.WriteLine("|         2. Xem Tat Ca Thong Bao          |");
+            Console.WriteLine("|         3. Doi Mat Khau                  |");
+            Console.WriteLine("|         4. Quan Ly Trang Ca Nhan         |");
+            Console.WriteLine("|         5. Xem Danh Sach Nguoi Dung      |");
+            Console.WriteLine("|__________________________________________|");
+            Console.Write("\nBan chon: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            int.TryParse(Console.ReadLine(), out chon);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            switch (chon)
+            {
+                //Neu la Khach hang Viet Nam
+                case 1:
+                    Console.Clear();
+                    TimKiemNguoiDung();
+                    break;
+                //Neu la Khach hang nuoc ngoai
+                case 2:
+                    Console.Clear();
+                    
+                    break;
+                //Quay lai Menu
+                case 3:
+                    break;
+                //Nhap khong hop le
+                default:
+                    Check(1);
+                    MainMenu();
+                    break;
+            }
+        }
+
+        //Ham Search
+        static void TimKiemNguoiDung()
+        {
+            Console.Clear();
+            int chon;
+            string nguoiDung;
+            Console.WriteLine("\n_____________TIM KIEM NGUOI DUNG_____________");
+            Console.WriteLine("|                                            |");
+            Console.WriteLine("|            1. Nhap Ten Nguoi Dung          |");
+            Console.WriteLine("|            2. Quay lai Menu                |");
+            Console.WriteLine("|____________________________________________|");
+            Console.Write("\nBan chon: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            int.TryParse(Console.ReadLine(), out chon);
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (chon)
+            {
+                case 1:
+                TimKiem:
+                    Console.Write("\nNhap nguoi dung can tim: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    nguoiDung = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (nguoiDung == "")
+                    {
+                        Check(2);
+                        goto TimKiem;
+                    }
+                    XuatNguoiDung(nguoiDung);
+                    Console.WriteLine("\nBan co muon tiep tuc tim kiem?");
+                    Console.WriteLine("1. Co");
+                    Console.WriteLine("2. Khong");
+                Check1:
+                    Console.Write("Ban chon: ");
+                    int chon1;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    int.TryParse(Console.ReadLine(), out chon1);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    switch (chon1)
+                    {
+                        //Chon co -> Ve tab Tim kiem
+                        case 1:
+                            Console.Clear();
+                            TimKiemNguoiDung();
+                            break;
+                        //Chon khong -> Ve Menu
+                        case 2:
+                            break;
+                        //Nhap khong hop le
+                        default:
+                            Check(1);
+                            goto Check1;
+                    }
+                    break;
+                //Quay lai Menu
+                case 2:
+                    break;
+                //Nhap khong hop le
+                default:
+                    Check(1);
+                    TimKiemNguoiDung();
                     break;
             }
         }
