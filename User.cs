@@ -57,11 +57,20 @@ namespace SocialConnect
             Console.ForegroundColor = ConsoleColor.Blue;
             username = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
+            if (KiemTraEmail(username) == false)
+            {
+                goto Username;
+            }
+        }
+
+        public bool KiemTraUsername(string username)
+        {
             if (username == "")
             {
                 Check(1);
-                goto Username;
+                return false;
             }
+            return true;
         }
 
         public void NhapEmail()
@@ -72,18 +81,28 @@ namespace SocialConnect
             Console.ForegroundColor = ConsoleColor.Blue;
             email = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
+            if (KiemTraEmail(email) == false)
+            {
+                goto Email;
+            }    
+        }
+
+        public bool KiemTraEmail(string email)
+        {
             if (email == "")
             {
                 Check(1);
-                goto Email;
+                return false;
             }
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
+                return true;
             }
             catch
             {
                 Check(2);
+                return false;
             }
         }
 
@@ -95,16 +114,25 @@ namespace SocialConnect
             Console.ForegroundColor = ConsoleColor.Blue;
             password = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
+            if (KiemTraEmail(password) == false)
+            {
+                goto Password;
+            }
+        }
+
+        public bool KiemTraPassword(string password)
+        {
             if (password == "")
             {
                 Check(1);
-                goto Password;
+                return false;
             }
             if (password.Length < 6)
             {
                 Check(3);
-                goto Password;
+                return false;
             }
+            return true;
         }
 
         public void Check(int chon)
