@@ -5,6 +5,9 @@ namespace SocialConnect
     class Program
     {
         private static List<User> listUser = new List<User>();
+        private static List<Post> listPost = new List<Post>();
+        private static List<Comment> listComment = new List<Comment>();
+        private static List<Like> listLike = new List<Like>();
         static void Main(string[] args)
         {
             User user1 = new User("Kim", "21110521@student.hcmute.edu.vn", "123456");
@@ -15,6 +18,11 @@ namespace SocialConnect
             listUser.Add(user2);
             listUser.Add(user3);
             listUser.Add(user4);
+
+            string username1 = user1.Username.ToString();
+
+            Post post1 = new Post("hello", username1, "13/05/2024", listComment, listLike);
+            listPost.Add(post1);
 
         Menu:
             Console.Clear();
@@ -296,6 +304,7 @@ namespace SocialConnect
                     break;
                 //Quay lai Menu
                 case 2:
+                    XemCacBaiViet();
                     break;
                 case 3:
                     break;
@@ -307,5 +316,24 @@ namespace SocialConnect
                     break;
             }
         }
+
+        // Ham Xem Cac Bai Viet
+        static void XemCacBaiViet()
+        {
+            if (User.lastUserID != 0)
+            {
+                Console.WriteLine("\n====================TAT CA BAI VIET====================\n");
+                for (int i = 0; i < listUser.Count; i++)
+                {
+                    {
+                        Post post = (Post)listPost[i];
+                        post.XuatBaiViet();
+                        Console.WriteLine("\n------------------------------------------------------------\n");
+                    }
+                }
+            }
+            else Check(3);
+        }
+
     }
 }

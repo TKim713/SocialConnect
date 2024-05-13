@@ -14,7 +14,7 @@ namespace SocialConnect
         private string email;
         private string password;
 
-        private static int lastUserID = 0;
+        public static int lastUserID = 0;
 
         public User(string username, string email, string password)
         {
