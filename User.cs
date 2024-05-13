@@ -44,6 +44,13 @@ namespace SocialConnect
         // Ham Dang Ky
         public void DangKy()
         {
+            NhapUsername();
+            NhapEmail();
+            NhapPassword();
+        }
+
+        public void NhapUsername()
+        {
         // Nhap Username
         Username:
             Console.Write("\nUsername: ");
@@ -55,6 +62,10 @@ namespace SocialConnect
                 Check(1);
                 goto Username;
             }
+        }
+
+        public void NhapEmail()
+        {
         // Nhap Email
         Email:
             Console.Write("\nEmail: ");
@@ -74,6 +85,10 @@ namespace SocialConnect
             {
                 Check(2);
             }
+        }
+
+        public void NhapPassword()
+        {
         // Nhap Password
         Password:
             Console.Write("\nPassword: ");
@@ -89,7 +104,7 @@ namespace SocialConnect
             {
                 Check(3);
                 goto Password;
-            }    
+            }
         }
 
         public void Check(int chon)
