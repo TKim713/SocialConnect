@@ -41,7 +41,7 @@ namespace SocialConnect
                     goto Menu;
                 //Neu chon Dang Ky
                 case 2:
-                    //XuatThongTin();
+                    DangKy();
                     goto Menu;
                 //Neu chon Thoat
                 case 3:
@@ -77,6 +77,22 @@ namespace SocialConnect
                     Check(1);
                     goto Menu;
             }
+        }
+
+        // Ham Dang Nhap
+        static void DangNhap()
+        {
+            User user = new User();
+            user.DangKy();
+            listUser.Add(user);
+        }
+
+        // Ham Dang Ky
+        static void DangKy()
+        {
+            User user = new User();
+            user.DangKy();
+            listUser.Add(user);
         }
 
         //Ham bao Loi lua chon
