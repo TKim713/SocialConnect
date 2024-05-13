@@ -24,8 +24,8 @@ namespace SocialConnect
             postID = ++lastPostID;
             this.content = content;
             this.author = author;
-            DateTime tempTimpstamp = DateTime.ParseExact(timestamp, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.timestamp = tempTimpstamp;
+            DateTime tempTimestamp = DateTime.ParseExact(timestamp, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.timestamp = tempTimestamp;
             this.comments = comments;
             this.likes = likes;
         }

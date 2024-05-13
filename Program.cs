@@ -8,6 +8,7 @@ namespace SocialConnect
         private static List<Post> listPost = new List<Post>();
         private static List<Comment> listComment = new List<Comment>();
         private static List<Like> listLike = new List<Like>();
+        private static List<Notification> listNoti = new List<Notification>();
         static void Main(string[] args)
         {
             User user1 = new User("Kim", "21110521@student.hcmute.edu.vn", "123456");
@@ -23,6 +24,12 @@ namespace SocialConnect
 
             Post post1 = new Post("hello", username1, "13/05/2024", listComment, listLike);
             listPost.Add(post1);
+
+            int userID1 = user1.UserID;
+            int postID1 = post1.PostID;
+
+            Notification noti1 = new Notification(userID1, "Tam like bai viet", "13/05/2024", postID1);
+            listNoti.Add(noti1);
 
         Menu:
             Console.Clear();
@@ -178,7 +185,7 @@ namespace SocialConnect
                 // Xem tat ca thong bao
                 case 2:
                     Console.Clear();
-                    
+                    XemTatCaThongBao();
                     break;
                 // Xem danh sach nguoi dung
                 case 5:
@@ -236,6 +243,25 @@ namespace SocialConnect
                     TimKiemNguoiDung();
                     break;
             }
+        }
+
+        static void XemTatCaThongBao()
+        {
+            if (User.lastUserID != 0)
+            {
+                Console.WriteLine("\n====================TAT CA THONG BAO====================\n");
+                for (int i = 0; i < listNoti.Count; i++)
+                {
+                    {
+                        Notification noti = (Notification)listNoti[i];
+                        noti.XuatThongBao();
+                        Console.WriteLine("\n------------------------------------------------------------\n");
+                    }
+                }
+            }
+            else Check(3);
+            Console.WriteLine("\nBam Enter de quay lai... ");
+            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
 
         // Xuat nguoi dung
